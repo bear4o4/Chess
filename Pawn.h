@@ -1,0 +1,18 @@
+#pragma once
+#include "Piece.h"
+
+class Pawn : public Piece
+{
+	
+	int move;
+ public:
+	Pawn(int _r,int _c,color _C,Board* _B);
+	virtual bool IsLegalMove(Board* B, int sr, int sc, int er, int ec);
+	virtual void Draw();
+	//virtual void Possibilities();
+	virtual int getMoves();
+	virtual void setMoves();
+	virtual char getPieceSym();
+	virtual int getTurnNUMbyColor();
+};
+
