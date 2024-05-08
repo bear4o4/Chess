@@ -36,7 +36,7 @@ public:
 	bool IsCheckmate();
 	bool doCheckmate();
 
-	bool SelfCheck();
+	bool SelfCheck(int i, int j, int k, int l);
 };
 
 

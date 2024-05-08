@@ -240,35 +240,32 @@ bool Gameflow::doCheckmate()
 					{
 						if (B->getPiece(i,j)!=nullptr && B->getPiece(i,j)->IsLegalMove(B,i,j,k,l) && B->getPiece(i,j)->getTurnNUMbyColor() == turn) {
 							if (B->getPiece(k,l)==nullptr||B->getPiece(k,l)->getTurnNUMbyColor()!=turn) {
-								if (!SelfCheck()) {
-
+								if (!SelfCheck(i,j,k,l)) {
+									return false;
 								}
 							}
 						}
-
 					}
-
 				}
-
 			}
-
 		}
-
-	}
-}
-bool Gameflow::SelfCheck()
-{
-	Piece* P1 = B->getPiece(sr, sc);
-	Piece* P2 = B->getPiece(er, ec);
-	B->swapPiece(er, ec, P1);
-	B->swapPiece(sr, sc, P2);
-	while (IsCheckmate()) {
-		B->swapPiece(sr, sc, P1);
-		B->swapPiece(er, ec, P2);
 		return true;
 	}
-	B->swapPiece(sr, sc, P1);
-	B->swapPiece(er, ec, P2);
+	return false;
+}
+bool Gameflow::SelfCheck(int i,int j,int k,int l)
+{
+	Piece* P1 = B->getPiece(i, j);
+	Piece* P2 = B->getPiece(k, l);
+	B->swapPiece(k, l, P1);
+	B->swapPiece(i, j, P2);
+	while (IsCheckmate()) {
+		B->swapPiece(i, j, P1);
+		B->swapPiece(k, l, P2);
+		return true;
+	}
+	B->swapPiece(i, j, P1);
+	B->swapPiece(k, l, P2);
 	return true;
 }
 
