@@ -25,6 +25,7 @@ public:
 	virtual void Draw() = 0;
 	//virtual void Possibilities() = 0;
 	color getColor();
+	void moveROWCOL(int i, int j);
 	virtual int getMoves()=0;
 	virtual void setMoves() = 0;
 	virtual char getPieceSym() = 0;

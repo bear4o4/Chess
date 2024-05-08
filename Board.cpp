@@ -32,16 +32,16 @@ Board::Board()
                 else if (ri == 0 && ci == 2 || ri == 0 && ci == 5) {
                     Ps[ri][ci] = new Bishp(ri, ci, WHITE, this);
                 }
-                else if (ri == 0 && ci == 3) {
+                else if (ri == 0 && ci == 4) {
                     Ps[ri][ci] = new King(ri, ci, WHITE, this);
                 }
-                else if (ri == 7 && ci == 3) {
+                else if (ri == 7 && ci == 4) {
                     Ps[ri][ci] = new King(ri, ci, BLACK, this);
                 }
-                else  if (ri == 0 && ci == 4) {
+                else  if (ri == 0 && ci == 3) {
                     Ps[ri][ci] = new Queen(ri, ci, WHITE, this);
                 }
-                else if (ri == 7 && ci == 4) {
+                else if (ri == 7 && ci == 3) {
                     Ps[ri][ci] = new Queen(ri, ci, BLACK, this);
                 }
                 else if (ri == 7 && ci == 0 || ri == 7 && ci == 7) {
@@ -62,7 +62,7 @@ Board::Board()
 
 void Board::PRINTboard()
 {
-   // system("cls");
+    system("cls");
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
@@ -103,13 +103,19 @@ Piece* Board::setPiece(int sr, int sc,  int er, int ec)
     
 }
 
-Piece* Board::swapPiece(int i, int j, Piece* temp)
+void Board::swapPiece(int i, int j, Piece* temp)
 {
-    Piece* T = Ps[i][j];
+    /* // Piece* T = Ps[i][j];
     Ps[i][j] = nullptr;
     Ps[temp->getROW()][temp->getCOL()] = T;
-    return T;
+    return T;*/
     
+
+    if(temp!=nullptr) {
+        Ps[i][j] = temp;
+        Ps[i][j]->moveROWCOL(i, j);
+    }
+    else { Ps[i][j] = temp; }
 }
 
 

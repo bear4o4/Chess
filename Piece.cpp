@@ -118,3 +118,9 @@ color Piece::getColor()
 {
 	return C;
 }
+
+void Piece::moveROWCOL(int i, int j)
+{
+	this->ri = i;
+	this->ci = j;
+}

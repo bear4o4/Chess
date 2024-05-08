@@ -15,26 +15,40 @@ void Gameflow::play()
 		TurnMsg(Pps[turn]);
 		do{
 			do {
-
 				do {
 					
 					do {
+						if (IsCheckmate()) {
+							cout << "_CHECKED_" << endl;
+						}
 						SelectSRCPosition(sr, sc);
 					} while (!IsValidSourceSelected(Pps[turn], sr, sc));
-					system("cls");
 					B->PRINTboard();
-					Highlight(sr,sc);          //highlight
+					Highlight(sr,sc);          
 					SelectDESPosition(er, ec);
 				} while (!IsValidDestinationSelected(Pps[turn], er, ec)) ;
+				while (!SelfCheck(sr,sc,er,ec)) {
+					cout << "_YOU ARE IN CHECK POSITION_" << endl;	
+					do{
+						do{
+							SelectSRCPosition(sr, sc);
+						} while (!IsValidSourceSelected(Pps[turn], sr, sc));
+						SelectDESPosition(er, ec);
+					} while (!IsValidDestinationSelected(Pps[turn], er, ec));
+				}
+			} while (!IsLegalMove() && turn == B->getPiece(sr, sc)->getTurnNUMbyColor());
 
-			} while (!IsKill());
-
-		} while (!IsLegalMove());
-
+		} while (!IsKill());
+		if (checkcastling()) {
+			docastling();
+		}
+		if (doCheckmate())
+		{
+			cout << "_CHECKMATE_" << endl;
+		}
 		UpdateBoard(sr,sc,er,ec);
-		system("cls");
 		B->PRINTboard();
-	} while (true);
+	} while (!doCheckmate());
 }
 bool Gameflow::IsKill()
 {//so baically what it will do is that it will kinda prevent player pieces to kill eachoter rest killing is happening 
@@ -200,15 +214,13 @@ void Gameflow::docastling()
 bool Gameflow::IsCheckmate()
 {
 	int ri, ci;//king 
-	for (int i = 0; i < 8; i++)
-	{
-		for (int j = 0; j < 8; j++)
-		{
-				if (B->getPiece(i, j) != nullptr&&turn==0&&B->getPiece(i,j)->getPieceSym()=='K') {
+	for (int i = 0; i < 8; i++){
+		for (int j = 0; j < 8; j++){
+				if (B->getPiece(i, j) != nullptr   &&  turn==B->getPiece(i,j)->getTurnNUMbyColor() && B->getPiece(i, j)->getPieceSym() == 'K') {
 					ri = i;
 					ci = j;
 				}
-				else if (B->getPiece(i, j) != nullptr&&turn == 1 && B->getPiece(i, j)->getPieceSym() == 'k') {
+				else if (B->getPiece(i, j) != nullptr   && turn == B->getPiece(i, j)->getTurnNUMbyColor() && B->getPiece(i, j)->getPieceSym() == 'k') {
 					ri = i;
 					ci = j;
 				}
@@ -220,11 +232,13 @@ bool Gameflow::IsCheckmate()
 		{
 			if (B->getPiece(i, j) != nullptr) {
 				if (B->getPiece(i, j)->IsLegalMove(B, i, j, ri, ci) && (B->getPiece(i, j)->getColor() != B->getPiece(ri, ci)->getColor())) {
+					//TurnMsg(Pps[turn]);
 					return true;
 				}
 			}
 		}
 	}
+	//TurnMsg(Pps[turn]);
 	return false;
 }
 bool Gameflow::doCheckmate()
