@@ -258,7 +258,18 @@ bool Gameflow::doCheckmate()
 }
 bool Gameflow::SelfCheck()
 {
-	
+	Piece* P1 = B->getPiece(sr, sc);
+	Piece* P2 = B->getPiece(er, ec);
+	B->swapPiece(er, ec, P1);
+	B->swapPiece(sr, sc, P2);
+	while (IsCheckmate()) {
+		B->swapPiece(sr, sc, P1);
+		B->swapPiece(er, ec, P2);
+		return true;
+	}
+	B->swapPiece(sr, sc, P1);
+	B->swapPiece(er, ec, P2);
+	return true;
 }
 
 

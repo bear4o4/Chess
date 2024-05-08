@@ -43,6 +43,16 @@ char King::getPieceSym()
 	}
 }
 
+int King::getROW()
+{
+	return ri;
+}
+
+int King::getCOL()
+{
+	return ci;
+}
+
 int King::getTurnNUMbyColor()
 {
 	if (C == BLACK) {

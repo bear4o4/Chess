@@ -38,6 +38,16 @@ char Rook::getPieceSym()
 	}
 }
 
+int Rook::getROW()
+{
+	return ri;
+}
+
+int Rook::getCOL()
+{
+	return ci;
+}
+
 int Rook::getTurnNUMbyColor()
 {
 	if (C == BLACK) {

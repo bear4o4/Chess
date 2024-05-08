@@ -38,6 +38,16 @@ char Queen::getPieceSym()
 	}
 }
 
+int Queen::getROW()
+{
+	return ri;
+}
+
+int Queen::getCOL()
+{
+	return ci;
+}
+
 int Queen::getTurnNUMbyColor()
 {
 	if (C == BLACK) {

@@ -39,6 +39,16 @@ char Bishp::getPieceSym()
 	}
 }
 
+int Bishp::getROW()
+{
+	return ri;
+}
+
+int Bishp::getCOL()
+{
+	return ci;
+}
+
 int Bishp::getTurnNUMbyColor()
 {
 	if (C == BLACK) {

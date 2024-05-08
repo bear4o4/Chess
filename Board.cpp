@@ -103,10 +103,14 @@ Piece* Board::setPiece(int sr, int sc,  int er, int ec)
     
 }
 
-//Board Board::getBoardCoordinate(int r,int c)
-//{
-//    Ps[r][c];
-//}
+Piece* Board::swapPiece(int i, int j, Piece* temp)
+{
+    Piece* T = Ps[i][j];
+    Ps[i][j] = nullptr;
+    Ps[temp->getROW()][temp->getCOL()] = T;
+    return T;
+    
+}
 
 
 

@@ -29,5 +29,7 @@ public:
 	virtual void setMoves() = 0;
 	virtual char getPieceSym() = 0;
 	virtual int getTurnNUMbyColor() = 0;
+	virtual int getROW() = 0;
+	virtual int getCOL() = 0;
 };
 

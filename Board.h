@@ -27,6 +27,7 @@ public:
 	Piece* getPiece(int r,int c);
 	//Board getBoardCoordinate(int r,int c);
 	Piece* setPiece(int sr, int sc,int er,int ec);
+	Piece* swapPiece(int i, int j, Piece* temp);
 
 };
 

@@ -65,3 +65,10 @@ int Pawn::getTurnNUMbyColor() {
 		return 0;
 	}
 }
+
+int Pawn::getROW() {
+	return ri;
+}
+int Pawn::getCOL() {
+	return ci;
+}

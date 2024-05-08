@@ -12,4 +12,6 @@ public:
 	virtual void setMoves();
 	virtual char getPieceSym();
 	virtual int getTurnNUMbyColor();
+	virtual int getROW();
+	virtual int getCOL();
 };

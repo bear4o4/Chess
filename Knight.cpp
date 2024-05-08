@@ -68,6 +68,16 @@ char Knight::getPieceSym()
 	}
 }
 
+int Knight::getROW()
+{
+	return ri;
+}
+
+int Knight::getCOL()
+{
+	return ci;
+}
+
 int Knight::getTurnNUMbyColor()
 {
 	if (C == BLACK) {
