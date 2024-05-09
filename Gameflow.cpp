@@ -16,29 +16,29 @@ void Gameflow::play()
 		do{
 			do {
 				do {
-					
 					do {
-						if (IsCheckmate()) {
-							cout << "_CHECKED_" << endl;
-						}
 						SelectSRCPosition(sr, sc);
 					} while (!IsValidSourceSelected(Pps[turn], sr, sc));
 					B->PRINTboard();
 					Highlight(sr,sc);          
 					SelectDESPosition(er, ec);
 				} while (!IsValidDestinationSelected(Pps[turn], er, ec)) ;
-				while (!SelfCheck(sr,sc,er,ec)) {
-					cout << "_YOU ARE IN CHECK POSITION_" << endl;	
-					do{
-						do{
-							SelectSRCPosition(sr, sc);
-						} while (!IsValidSourceSelected(Pps[turn], sr, sc));
-						SelectDESPosition(er, ec);
-					} while (!IsValidDestinationSelected(Pps[turn], er, ec));
-				}
-			} while (!IsLegalMove() && turn == B->getPiece(sr, sc)->getTurnNUMbyColor());
 
+			} while (!IsLegalMove() && turn == B->getPiece(sr, sc)->getTurnNUMbyColor());
+			while (!SelfCheck(sr, sc, er, ec)) {
+				cout << "_YOU ARE IN CHECK POSITION SELECT POS AGAIN_" << endl;
+				do {
+					do {
+						SelectSRCPosition(sr, sc);
+					} while (!IsValidSourceSelected(Pps[turn], sr, sc));
+					SelectDESPosition(er, ec);
+				} while (!IsValidDestinationSelected(Pps[turn], er, ec));
+			}
+			if (IsCheckmate()) {
+				cout << "_CHECKED_" << endl;
+			}
 		} while (!IsKill());
+
 		if (checkcastling()) {
 			docastling();
 		}
