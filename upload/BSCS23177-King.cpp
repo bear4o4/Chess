@@ -22,9 +22,6 @@ void King::Draw()
 {
 	cout << ((C == WHITE) ? 'K' : 'k');
 }
-void King::Draw(ostream& out) const {
-	out << ((C == WHITE) ? 'K' : 'k');
-}
 
 int King::getMoves()
 {
@@ -64,13 +61,4 @@ int King::getTurnNUMbyColor()
 	else {
 		return 0;
 	}
-}
-
-
-void  King::set_movecount() {
-	movecount++;
-}
-
-int King::get_movecount() {
-	return movecount;
 }

@@ -7,11 +7,10 @@ Pawn::Pawn(int _r, int _c, color _C, Board* _B) :Piece(_r,_c,_C,_B)
 	this->C = _C;
 	this->B = _B;
 	this->move = 0;
-	this->movecount = 0;
 }
 bool Pawn::IsLegalMove(Board* B, int sr, int sc, int er, int ec) {
 	int changeinrow;
-	changeinrow = (sr - er);
+	changeinrow = abs(sr - er);
 
 	if (getColor() == BLACK) {
 		if ((changeinrow == 2)&&(sc==ec)) {
@@ -22,10 +21,10 @@ bool Pawn::IsLegalMove(Board* B, int sr, int sc, int er, int ec) {
 		}
 	}
 	else if (getColor() == WHITE) {//oper
-		if ((changeinrow == -2) && (sc == ec)) {
+		if ((changeinrow == 2) && (sc == ec)) {
 			return IsVerticalMove(sr, sc, sr+2, sc) && IsVertiaclPathClear(B, sr, sc, sr + 2, sc);
 		}
-		else if ((changeinrow == -1) && (sc == ec)) {
+		else if ((changeinrow == 1) && (sc == ec)) {
 			return IsVerticalMove(sr, sc, sr + 1, sc) && IsVertiaclPathClear(B, sr, sc, sr + 1, sc);
 		}
 	}
@@ -37,9 +36,6 @@ bool Pawn::IsLegalMove(Board* B, int sr, int sc, int er, int ec) {
 void Pawn::Draw()
 {
 	cout << ((C == WHITE) ? 'P' : 'p');
-}
-void Pawn::Draw(ostream& out)const {
-	out << ((C == WHITE) ? 'P' : 'p');
 }
 
 int Pawn::getMoves()
@@ -75,14 +71,4 @@ int Pawn::getROW() {
 }
 int Pawn::getCOL() {
 	return ci;
-}
-
-void Pawn::set_movecount()
-{
-	movecount = movecount + 1;
-}
-
-int Pawn::get_movecount()
-{
-	return movecount;
 }

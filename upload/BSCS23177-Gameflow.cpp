@@ -10,36 +10,21 @@ Gameflow::Gameflow()
 }
 void Gameflow::play()
 {
-	int r = 0;
+	B->PRINTboard();
 	do{
-		B->PRINTboard();
-		if (r>0) {
-			cout <<endl<<endl<< "DO YOU WANT TO UNDO ?: (YES=y)(NO=n) " << endl;
-			char g; cin >> g;
-			if (g == 'y') {
-				UNDO();
-				UpdateBoard(er, ec,sr,sc);
-			}
-		}
-		r++;
-		loadtofile();
 		TurnMsg(Pps[turn]);
+		do{
 			do {
+				do {
 					do {
-						do 
-						{
-							if (IsCheckmate()) {
-								cout << "_CHECKED_" << endl;
-							}
-						  SelectSRCPosition(sr, sc);
-						} while (!IsValidSourceSelected(Pps[turn], sr, sc));
-						B->PRINTboard();
-						Highlight(sr, sc);
-						SelectDESPosition(er, ec);
-					} while (!IsValidDestinationSelected(Pps[turn], er, ec)&&(Pawnmovementcheck(sr, sc, er, ec) == false));
-				
-			} while (!IsLegalMove() && turn == B->getPiece(sr, sc)->getTurnNUMbyColor()&&(!IsKill()));
+						SelectSRCPosition(sr, sc);
+					} while (!IsValidSourceSelected(Pps[turn], sr, sc));
+					B->PRINTboard();
+					Highlight(sr,sc);          
+					SelectDESPosition(er, ec);
+				} while (!IsValidDestinationSelected(Pps[turn], er, ec)) ;
 
+			} while (!IsLegalMove() && turn == B->getPiece(sr, sc)->getTurnNUMbyColor());
 			while (!SelfCheck(sr, sc, er, ec)) {
 				cout << "_YOU ARE IN CHECK POSITION SELECT POS AGAIN_" << endl;
 				do {
@@ -47,8 +32,13 @@ void Gameflow::play()
 						SelectSRCPosition(sr, sc);
 					} while (!IsValidSourceSelected(Pps[turn], sr, sc));
 					SelectDESPosition(er, ec);
-				} while (!IsValidDestinationSelected(Pps[turn], er, ec) && (Pawnmovementcheck(sr, sc, er, ec) == false));
+				} while (!IsValidDestinationSelected(Pps[turn], er, ec));
 			}
+			if (IsCheckmate()) {
+				cout << "_CHECKED_" << endl;
+			}
+		} while (!IsKill());
+
 		if (checkcastling()) {
 			docastling();
 		}
@@ -57,16 +47,12 @@ void Gameflow::play()
 			cout << "_CHECKMATE_" << endl;
 		}
 		UpdateBoard(sr,sc,er,ec);
-
-		
+		B->PRINTboard();
 	} while (!doCheckmate());
 }
 bool Gameflow::IsKill()
 {//so baically what it will do is that it will kinda prevent player pieces to kill eachoter rest killing is happening 
 	if (B->getPiece(er, ec)!=nullptr) {
-		if (pawnkill(sr, sc, er, ec)==true) {
-			return true;
-		}
 		if (B->getPiece(sr, sc)->getColor() == B->getPiece(er, ec)->getColor()) {
 			return false;
 		}
@@ -75,6 +61,7 @@ bool Gameflow::IsKill()
 }
 void Gameflow::Highlight(int& sr ,int &sc)
 {
+
 	for (int i = 0; i < 8; i++){//cleaning HPs array 
 		for (int j = 0; j < 8; j++){
 			if ((B->getPiece(i, j) == nullptr)) {
@@ -295,61 +282,6 @@ bool Gameflow::SelfCheck(int i,int j,int k,int l)
 	B->swapPiece(k, l, P2);
 	return true;
 }
-bool Gameflow::Pawnmovementcheck(int &sr,int &sc, int& er, int& ec) {
-	if (B->getPiece(sr, sc)->getPieceSym() == 'P' || B->getPiece(sr, sc)->getPieceSym() == 'p')
-	{
-		if (B->getPiece(sr, sc)->get_movecount() == 0 && (abs(sr - er) == 1 || abs(sr - er) == 2)) {
-			B->getPiece(sr, sc)->set_movecount();
-			return true;
-		}
-		else if (B->getPiece(sr, sc)->get_movecount() > 0&& B->getPiece(sr, sc)->get_movecount() < 2 && (abs(sr - er) ==1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	//sc == ec || abs(ec - sc) == 1 &&
-}
-bool Gameflow::pawnkill(int& sr, int& sc, int& er, int& ec) {
-	if (B->getPiece(sr,sc)->getPieceSym()=='P') {
-		if (B->getPiece(er, ec)->getPieceSym() == 'p') {
-			return true;
-		}
-	}
-	if (B->getPiece(sr, sc)->getPieceSym() == 'p') {
-		if (B->getPiece(er, ec)->getPieceSym() == 'P') {
-			return true;
-		}
-	}
-	else {
-		return false;
-	}
-}
-void  Gameflow::loadtofile() {
-	ofstream ou("UNDO.txt");
-	ofstream out("MovesMade.txt", ios::app);
-	
-	if (!out||!ou) {
-		cout << "Failed to open file " << endl;
-		return;
-	}
-	B->PRINTboard(ou);
-	B->PRINTboard(out);
-	
-}
 
-void Gameflow::UNDO() {
-	system("cls");
-	ifstream i("UNDO.txt");
-	if (!i) {
-		cout << "file not open " << endl;
-		return;
-	}
-	string l;
-	while (getline(i, l)) {
-		cout << l << endl;
-	}
-}
 
 

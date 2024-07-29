@@ -28,11 +28,6 @@ void Queen::setMoves()
 	move + 1;
 }
 
-void Queen::Draw(ostream& out)const
-{
-	out << ((C == WHITE) ? 'Q' : 'q');
-}
-
 char Queen::getPieceSym()
 {
 	if (C == WHITE) {
@@ -51,16 +46,6 @@ int Queen::getROW()
 int Queen::getCOL()
 {
 	return ci;
-}
-
-void Queen::set_movecount()
-{
-	movecount = movecount + 1;
-}
-
-int Queen::get_movecount()
-{
-	return movecount;
 }
 
 int Queen::getTurnNUMbyColor()

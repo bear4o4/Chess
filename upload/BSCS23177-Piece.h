@@ -23,8 +23,7 @@ public:
 	Piece(int _r,int _c, color _C, Board* _B);
 	virtual bool IsLegalMove(Board* B,int sr,int sc,int er, int ec)=0;
 	virtual void Draw() = 0;
-	virtual void Draw(ostream& out)const = 0;
-	
+	//virtual void Possibilities() = 0;
 	color getColor();
 	void moveROWCOL(int i, int j);
 	virtual int getMoves()=0;
@@ -33,8 +32,5 @@ public:
 	virtual int getTurnNUMbyColor() = 0;
 	virtual int getROW() = 0;
 	virtual int getCOL() = 0;
-
-	virtual void set_movecount()=0;
-	virtual int get_movecount()=0;
 };
 

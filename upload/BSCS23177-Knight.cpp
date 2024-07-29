@@ -58,11 +58,6 @@ void Knight::setMoves()
 	move + 1;
 }
 
-void Knight::Draw(ostream& out)const
-{
-	out << ((C == WHITE) ? 'N' : 'n');
-}
-
 char Knight::getPieceSym()
 {
 	if (C == WHITE) {
@@ -81,16 +76,6 @@ int Knight::getROW()
 int Knight::getCOL()
 {
 	return ci;
-}
-
-void Knight::set_movecount()
-{
-	movecount = movecount + 1;
-}
-
-int Knight::get_movecount()
-{
-	return movecount;
 }
 
 int Knight::getTurnNUMbyColor()

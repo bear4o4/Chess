@@ -28,11 +28,6 @@ void Rook::setMoves()
 	move + 1;
 }
 
-void Rook::Draw(ostream& out)const
-{
-	out << ((C == WHITE) ? 'R' : 'r');
-}
-
 char Rook::getPieceSym()
 {
 	if (C == WHITE) {
@@ -51,16 +46,6 @@ int Rook::getROW()
 int Rook::getCOL()
 {
 	return ci;
-}
-
-void Rook::set_movecount()
-{
-	movecount = movecount + 1;
-}
-
-int Rook::get_movecount()
-{
-	return movecount;
 }
 
 int Rook::getTurnNUMbyColor()

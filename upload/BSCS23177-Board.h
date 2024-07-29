@@ -7,7 +7,6 @@
 #include"Queen.h"
 #include"Bishp.h"
 #include"Knight.h"
-#include<ostream>
 using namespace std;
 //class Piece;
 //class Pawn;
@@ -29,7 +28,6 @@ public:
 	//Board getBoardCoordinate(int r,int c);
 	Piece* setPiece(int sr, int sc,int er,int ec);
 	void swapPiece(int i, int j, Piece* temp);
-	void PRINTboard(ostream& out);
 
 };
 

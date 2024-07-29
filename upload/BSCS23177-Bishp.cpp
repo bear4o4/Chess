@@ -29,11 +29,6 @@ void Bishp::setMoves()
 	move + 1;
 }
 
-void Bishp::Draw(ostream& out)const
-{
-	out << ((C == WHITE) ? 'B' : 'b');
-}
-
 char Bishp::getPieceSym()
 {
 	if (C == WHITE) {
@@ -52,16 +47,6 @@ int Bishp::getROW()
 int Bishp::getCOL()
 {
 	return ci;
-}
-
-void Bishp::set_movecount()
-{
-	movecount = movecount + 1;
-}
-
-int Bishp::get_movecount()
-{
-	return movecount;
 }
 
 int Bishp::getTurnNUMbyColor()

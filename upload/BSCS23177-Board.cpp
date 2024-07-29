@@ -118,25 +118,6 @@ void Board::swapPiece(int i, int j, Piece* temp)
     else { Ps[i][j] = temp; }
 }
 
-void Board::PRINTboard(ostream& out)
-{
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            if (Ps[i][j] == nullptr) {
-                out << "-";
-            }
-            else {
-                Ps[i][j]->Draw(out);
-            }
-        }
-        out << endl;
-
-    }
-    out << endl << endl;
-}
-
 
 
 

@@ -6,7 +6,6 @@ using namespace std;
 #include"Piece.h"
 #include<time.h>
 #include<string>
-#include<fstream>
 
 
 class Gameflow
@@ -38,12 +37,6 @@ public:
 	bool doCheckmate();
 
 	bool SelfCheck(int i, int j, int k, int l);
-
-	bool Pawnmovementcheck(int& sr, int& sc, int& er, int& ec );
-	bool pawnkill(int& sr, int& sc, int& er, int& ec);
-	void loadtofile();
-
-	void UNDO();
 };
 
 
